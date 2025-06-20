@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: gk-zhiyuan   # Can use a secret or hardcode
 
 jobs:
-  build-and-push:
+  buildandpush:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
