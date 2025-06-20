@@ -20,4 +20,4 @@ jobs:
         run: docker build -t acr0702.azurecr.io/gk-zhiyuan:${{ steps.tag.outputs.TAG }} .
 
       - name: Push Docker image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.TAG }}
+        run: docker push acr0702.azurecr.io/gk-zhiyuan:${{ steps.tag.outputs.TAG }}
