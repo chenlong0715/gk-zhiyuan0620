@@ -1,0 +1,29 @@
+name: Build and Push Docker Image to ACR
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: acr0702.azurecr.io
+  IMAGE_NAME: gk-zhiyuan   # Can use a secret or hardcode
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set image tag with date
+        id: tag
+        run: echo "TAG=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Docker login to ACR
+        run: echo "K3Gt0d486iGEikkZEy+PlgfKdeIxLLEuB1sayrU6vh+ACRCx4rHL" | docker login acr0702.azurecr.io -u acr0702 --password-stdin
+        
+     - name: Build Docker image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.TAG }} .
+
+      - name: Push Docker image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.TAG }}
