@@ -14,7 +14,7 @@ jobs:
         id: tag
         run: echo "TAG=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Docker login to ACR
-        run: echo "K3Gt0d486iGEikkZEy+PlgfKdeIxLLEuB1sayrU6vh+ACRCx4rHL" | docker login acr0702.azurecr.io -u acr0702 --password-stdin
+        run: echo "***" | docker login acr0702.azurecr.io -u acr0702 --password-stdin
         
       - name: Build Docker image
         run: docker build -t acr0702.azurecr.io/gk-zhiyuan:${{ steps.tag.outputs.TAG }} .
